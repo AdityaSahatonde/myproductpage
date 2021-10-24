@@ -1,23 +1,40 @@
-import logo from './logo.svg';
+
 import './App.css';
+import Item from './Components/ProductView';
+import myData from './product.json';
 
 function App() {
+  
+  let KeyGenrForApp=(index)=>{
+    return `${ index }_${ new Date().getTime() }`;
+
+  }
+  let KeyGenrForItem =(index,name)=>{
+    return `${name}_${ index }_${ new Date().getTime() }`;
+    
+
+}
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {
+        myData.data.map(
+          (el,index)=>{
+              return (
+                
+              <><div className="Header"><p key={index}>{el.name}</p>
+            
+              <hr key={KeyGenrForApp(index)} style={{backgroundColor:"black"}}/></div>
+              <div className="Itme" key={KeyGenrForApp(el.name)}>
+              <Item key={KeyGenrForItem(index,el.name)} ProductList={el.productList}/>
+
+              </div>
+              
+              </>
+                
+              )
+          }
+        )
+      }
     </div>
   );
 }
